@@ -1,14 +1,19 @@
 import random
 import time
 
-print("=======================================")
-print("         TERMINAL GREMLIN V1.0")
-print("=======================================")
+print("================================")
+print("     TERMINAL GREMLIN v1.0")
+print("================================")
 
-name = input("State your name, mortal:")
+name = input("State your name, mortal: ")
 
-print(f"\nHmm... {name}. ")
+print(f"\nHmm... {name}.")
 print("The terminal has acknowledged your presence.")
+
+
+# -------------------------
+# PASSWORD SECURITY CHECK
+# -------------------------
 
 secret_password = "gremlin"
 authorized = False
@@ -18,8 +23,8 @@ print("\nSECURITY CHECK REQUIRED.")
 print("You have 3 attempts to provide the secret password.")
 
 for attempt in range(3):
+
     password = input("\nPASSWORD: ")
-  
 
     if password.lower() == secret_password:
         print("PASSWORD ACCEPTED.")
@@ -31,28 +36,42 @@ for attempt in range(3):
         failed_attempts = failed_attempts + 1
         attempts_left = 2 - attempt
 
+        print("INCORRECT PASSWORD.")
+
         if attempts_left > 0:
-            print("INCORRECT PASSWORD.")
             print(f"Attempts remaining: {attempts_left}")
 
         else:
-            print("INCORRECT PASSWORD.")
             print("NO ATTEMPTS REMAINING.")
 
-intruder_bonus = failed_attempts * 10     
+
+# -------------------------
+# FAILED LOGIN CONSEQUENCES
+# -------------------------
+
+intruder_bonus = failed_attempts * 10
+
 if authorized == False:
-        print("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print("     SECURITY BREACH DETECTED")
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print("IDENTITY FLAGGED.")
-        print("AUTHORIZATION: DENIED")
-        print("INTRUSION ATTEMPT: LOGGED")
-        print("GREMLIN RESPONSE TEAM: DISPATCHED")
-        print("\nContinuing scan against security recommendations...")
 
-        intruder_bonus = 25
+    print("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("     SECURITY BREACH DETECTED")
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-    
+    print("IDENTITY FLAGGED.")
+    print("AUTHORIZATION: DENIED")
+    print("INTRUSION ATTEMPT: LOGGED")
+    print("GREMLIN RESPONSE TEAM: DISPATCHED")
+
+    print("\nContinuing scan against security recommendations...")
+
+    # Full lockout adds another 25 threat points
+    intruder_bonus = intruder_bonus + 25
+
+
+# -------------------------
+# EMOTIONAL STABILITY CHECK
+# -------------------------
+
 mood = int(input("\nHow emotionally stable are you from 1-10? "))
 
 if mood <= 3:
@@ -67,17 +86,26 @@ else:
     print("Ah, a happy mortal!")
     print("The gremlin is pleased with your emotional state.")
 
+
+# -------------------------
+# RANDOM FINAL ASSESSMENT
+# -------------------------
+
 responses = [
     "The gremlin is amused by your presence.",
     "The terminal accepts your offering.",
     "The gremlin has updated your file.",
     "Your fate has been logged.",
     "No errors detected. Emotionally, however... uncertain."
-
 ]
 
 print("\nFinal assessment:")
 print(random.choice(responses))
+
+
+# -------------------------
+# FAKE SECURITY SCAN
+# -------------------------
 
 print("\nINITIALIZING GREMLIN SECURITY PROTOCOL...")
 time.sleep(1)
@@ -100,11 +128,26 @@ time.sleep(1)
 print("Scan complete.")
 time.sleep(1)
 
-print("\n========================================")
-print("            IDENTITY SCAN")
-print("========================================")
 
-threat_level = random.randint(1, 100)
+# -------------------------
+# THREAT LEVEL
+# -------------------------
+
+# Start with a random threat level
+base_threat = random.randint(1, 100)
+
+# Add penalties from failed password attempts
+threat_level = base_threat + intruder_bonus
+
+# Never allow threat level above 100
+if threat_level > 100:
+    threat_level = 100
+
+
+# -------------------------
+# RISK CLASSIFICATION
+# -------------------------
+
 if threat_level <= 20:
     risk_level = "LOW"
     threat_reaction = "LOW RISK: Barely a threat. Proceed with caution."
@@ -129,6 +172,11 @@ else:
     risk_level = "100% RISK"
     threat_reaction = "The gremlin has detected a severe threat. ABANDON ALL HOPE."
 
+
+# -------------------------
+# GREMLIN APPROVAL
+# -------------------------
+
 approval_options = [
     "APPROVED",
     "PENDING...",
@@ -141,21 +189,16 @@ approval_options = [
     "WHO LET YOU IN?",
     "ACCESS GRANTED",
     "GREMLIN APPROVED",
-    "GREMLOUSLY SUSPICIOUS"
+    "GREMLINLY SUSPICIOUS"
 ]
 
-clearance_options = [
-    "PEASANT",
-    "COMMONER",
-    "ACOLYTE",
-    "WITCH",
-    "HEXWEAVER",
-    "WARLOCK",
-    "OVERLORD",
-    "FORBIDDEN USER",
-    "ABOSLUTE CHAOS"
-]
 gremlin_approval = random.choice(approval_options)
+
+
+# -------------------------
+# CLEARANCE LEVEL
+# -------------------------
+
 if threat_level <= 20:
     clearance_level = random.choice([
         "PEASANT",
@@ -192,11 +235,22 @@ else:
         "ABSOLUTE CHAOS"
     ])
 
+
+# -------------------------
+# FINAL IDENTITY REPORT
+# -------------------------
+
+print("\n================================")
+print("       IDENTITY SCAN")
+print("================================")
+
 print(f"IDENTITY CONFIRMED: {name}")
+
 if authorized:
     print("ACCESS LEVEL: Questionable")
 else:
     print("ACCESS LEVEL: UNAUTHORIZED INTRUDER")
+
 print(f"FAILED LOGIN ATTEMPTS: {failed_attempts}")
 print(f"CLEARANCE LEVEL: {clearance_level}")
 print(f"THREAT LEVEL: {threat_level}%")

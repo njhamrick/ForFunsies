@@ -1,0 +1,57 @@
+# if True:
+#     print ('Conditional was True') # This will show in the Terminal
+
+# if False:
+#     print ('Conditional was True') # This will not show in the Terminal
+
+language = "Java"
+
+if language == "Python":
+    print ("language is Python'")
+elif language == "Java":
+    print("Language is Java")
+else:
+    print("no match")
+
+
+fish = "Rainbow Trout" 
+
+if fish == "Bluegill": 
+	print("You caught a Bluegill!") 
+elif fish == "Rainbow Trout": 
+	print("You caught a Rainbow Trout!") 
+else:
+    print("You caught something else!") 
+
+# And , Or , Not
+
+user = "Admin"
+logged_in = False
+
+if user == "Admin" or logged_in:
+     print("Admin Page")
+else:
+     print("Bad Credentials")
+
+user = "Nikki"
+logged_in = False # not switches to True
+
+if not logged_in:
+     print("Please log in")
+else:
+     print("Welcome")
+
+
+
+# Lists
+
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+print(id(a))
+print(id(b))
+print(a == b) #
+
+c = [1, 2, 3]
+d = [1, 2, 3]
+print(a == b)

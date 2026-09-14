@@ -10,20 +10,30 @@ from PIL import Image, ImageTk, ImageEnhance
 # WINDOW
 # =========================================================
 
-WINDOW_WIDTH = 1100
+WINDOW_WIDTH = 1700
 WINDOW_HEIGHT = 600
-DESK_Y = 445
+DESK_Y = 555
 
 root = tk.Tk()
 root.title("Russian Blue Desktop Pet")
 root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 root.resizable(False, False)
 
+# Remove the normal Windows title bar and border
+root.overrideredirect(True)
+
+# Keep the pet above other windows
+root.attributes("-topmost", True)
+root.wm_attributes(
+    "-transparentcolor",
+    "#8F8D8B"
+)
+
 canvas = tk.Canvas(
     root,
     width=WINDOW_WIDTH,
     height=WINDOW_HEIGHT,
-    bg="#d8d2c6",
+    bg="#8F8D8B",
     highlightthickness=0
 )
 
@@ -35,14 +45,14 @@ canvas.pack()
 # =========================================================
 
 # Wall
-canvas.create_rectangle(
-    0,
-    0,
-    WINDOW_WIDTH,
-    DESK_Y,
-    fill="#d8d2c6",
-    outline=""
-)
+#canvas.create_rectangle(
+ #   0,
+  #  0,
+   # WINDOW_WIDTH,
+    #DESK_Y,
+    #fill="#d8d2c6",
+   # outline=""
+#)
 
 # Back edge of desk
 canvas.create_rectangle(
@@ -2676,6 +2686,82 @@ draw_cat()
 
 schedule_next_action(
     1500
+)
+
+# =========================================================
+# RIGHT-CLICK MENU
+# =========================================================
+
+def show_right_click_menu(event):
+    menu.tk_popup(
+        event.x_root,
+        event.y_root
+    )
+
+
+def close_pet():
+    root.destroy()
+
+
+menu = tk.Menu(
+    root,
+    tearoff=0
+)
+
+menu.add_command(
+    label="Exit",
+    command=close_pet
+)
+
+root.bind(
+    "<Button-3>",
+    show_right_click_menu
+)
+
+# =========================================================
+# SHIFT + DRAG TO MOVE WINDOW
+# =========================================================
+
+drag_start_x = 0
+drag_start_y = 0
+
+
+def start_drag(event):
+
+    global drag_start_x
+    global drag_start_y
+
+    drag_start_x = event.x_root
+    drag_start_y = event.y_root
+
+
+def drag_window(event):
+
+    global drag_start_x
+    global drag_start_y
+
+    move_x = event.x_root - drag_start_x
+    move_y = event.y_root - drag_start_y
+
+    current_x = root.winfo_x()
+    current_y = root.winfo_y()
+
+    root.geometry(
+        f"+{current_x + move_x}+{current_y + move_y}"
+    )
+
+    drag_start_x = event.x_root
+    drag_start_y = event.y_root
+
+
+root.bind(
+    "<Shift-ButtonPress-1>",
+    start_drag
+)
+
+root.bind(
+    "<Shift-B1-Motion>",
+    drag_window
 )
 
 root.mainloop()
